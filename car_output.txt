@@ -1,0 +1,1 @@
+Car {wheel=Wheel { type=Alloy }, engine=Engine {starter=Starter { type=Electric }, sparkPlug=SparkPlug { type=Iridium }}, accumulator=Accumulator { capacity=12V }, suspension=Suspension {hinge=Hinge { type=Double }, differential=Differential { type=Limited-Slip }}}
