@@ -1,5 +1,6 @@
 package org.example;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +27,11 @@ public class FirstController {
         // Проверка условий
         if (id <= 10) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("InternalServerError: Invalid parameters");
+                    .body("Недопустимый идентификатор: должно быть больше 10");
         }
-        if (name.length() <5) {
+        if (name.length() <= 4) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("InternalServerError: Invalid parameters");
+                    .body("Недопустимое имя: длина должна быть больше 5");
         }
         // Задержка в зависимости от значения id
         if (id > 10 && id < 50) {
@@ -48,7 +49,7 @@ public class FirstController {
 
     }
     @PostMapping("/postRequest")
-    public ResponseEntity<String> handlePostRequest(
+    public ResponseEntity<String> handlePerson(
             @RequestBody Person requestBody)
             throws IOException {
         // Проверка условий
@@ -56,7 +57,7 @@ public class FirstController {
                 requestBody.getSurname() == null || requestBody.getSurname().isEmpty() ||
                 requestBody.getAge() == null || requestBody.getAge() == 0) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "InternalServerError: Invalid body");
+                    "Отсутствуют обязательные поля: имя, фамилия или возраст");
         }
         String postAnswer = new String(Files.readAllBytes(
                 Paths.get("src/main/resources/postRequest.txt")));
